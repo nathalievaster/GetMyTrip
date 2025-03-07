@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moment 1 - Frontend-baserad webbutveckling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">Moment 1</a></h1>
+                <!-- Menyknapp för att öppna meny på mobila enheter -->
+                <button class="menu-btn open" id="open-menu">
+                    <span class="menu-icon">
+                        <span class="bars"></span>
+                        <span class="bars"></span>
+                        <span class="bars"></span>
+                    </span>
+                    <span class="menu-text">Meny</span>
+                </button>
+                <!-- Navigeringsmeny -->
+                <nav id="nav-menu">
+                    <!-- Menyknapp för att stänga menyn på mobila enheter -->
+                    <button class="menu-btn close" id="close-menu">
+                        <span class="menu-icon">
+                            <span class="bars cross1"></span>
+                            <span class="bars cross2"></span>
+                        </span>
+                        <span class="menu-text">Stäng meny</span>
+                    </button>
+                    <ul>
+                        <li><a href="index.html" class="active">Startsida</a></li>
+                        <li><a href="pictures.html">Bilder</a></li>
+                        <li><a href="process.html">Arbetsprocess</a></li>
+                    </ul>
+                </nav>
+    </header>
+
+    <main class="index-text">
+        <h1>Moment 1 - Frontend-baserad webbutveckling</h1>
+        <p>I denna uppgift ska vi skapa en webbplats från grunden och använda Node.js tillsammans med npm för att
+            automatisera olika utvecklingsuppgifter som minifiering, transpilering och optimering av filer. Webbplatsen
+            ska bestå av HTML, CSS och JavaScript, och innehålla minst tre sidor: en startsida, en bildsida med
+            fotografier, samt en sida där vi beskriver arbetsprocessen för utvecklingen och publiceringen av
+            webbplatsen.</p>
+            <p>För att effektivisera arbetet och underlätta hanteringen av koden, ska vi använda npm och
+            verktyg som Parcel, Gulp eller liknande för att automatisera uppgifter som att minifiera CSS och JavaScript,
+            transpilera JavaScript för att säkerställa bakåtkompatibilitet och optimera bilder genom att konvertera dem
+            till moderna format som WebP eller AVIF.</p>
+            <p>Målet med uppgiften är att bygga en webbplats med en bra
+            filstruktur och arbetsflöde, och därefter publicera den automatiskt på en webbhost genom att använda Git och
+            GitHub för versionshantering och publicering. Vi ska skapa en så kallad boilerplate, en förkonfigurerad
+            projektstruktur, som kan användas som grund för framtida projekt och som underlättar utvecklingsarbetet för
+            både nuvarande och kommande webbutvecklingsprojekt.</p>
+    </main>
+    <footer>
+        <p>Nathalie Fredriksson</p>
+        <p>Mittuniversitetet</p>
+    </footer>
+
+
+</body>
+
+</html>

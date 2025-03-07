@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moment 1 - Frontend-baserad webbutveckling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">Moment 1</a></h1>
+        <!-- Menyknapp för att öppna meny på mobila enheter -->
+        <button class="menu-btn open" id="open-menu">
+            <span class="menu-icon">
+                <span class="bars"></span>
+                <span class="bars"></span>
+                <span class="bars"></span>
+            </span>
+            <span class="menu-text">Meny</span>
+        </button>
+        <!-- Navigeringsmeny -->
+        <nav id="nav-menu">
+            <!-- Menyknapp för att stänga menyn på mobila enheter -->
+            <button class="menu-btn close" id="close-menu">
+                <span class="menu-icon">
+                    <span class="bars cross1"></span>
+                    <span class="bars cross2"></span>
+                </span>
+                <span class="menu-text">Stäng meny</span>
+            </button>
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="pictures.html" class="active">Bilder</a></li>
+                <li><a href="process.html">Arbetsprocess</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main> 
+        <section class="pictures"> 
+          <h2>Mina vänner på fyra ben</h2> 
+      
+          <figure> 
+            <figcaption>Belle</figcaption> 
+            <picture>
+              <source srcset="images/belle.jpg?as=avif" type="image/avif">
+              <source srcset="images/belle.jpg?as=webp" type="image/webp">
+              <img src="images/belle.jpg" alt="En svartvit Bordercollie ute i snö">
+            </picture>
+          </figure> 
+      
+          <figure> 
+            <figcaption>Kira och Love</figcaption> 
+            <picture>
+              <source srcset="images/kiraLove.jpg?as=avif" type="image/avif">
+              <source srcset="images/kiraLove.jpg?as=webp" type="image/webp">
+              <img src="images/kiraLove.jpg" alt="En Cockerspaniel och en Bordercollie som leker ute i snö">
+            </picture>
+          </figure> 
+      
+          <figure> 
+            <figcaption>Love</figcaption> 
+            <picture>
+              <source srcset="images/lovesno.jpg?as=avif" type="image/avif">
+              <source srcset="images/lovesno.jpg?as=webp" type="image/webp">
+              <img src="images/lovesno.jpg" alt="En grå Bordercollie vars ansikte är täckt i snö">
+            </picture>
+          </figure> 
+      
+          <figure> 
+            <figcaption>Lukas och Avve</figcaption> 
+            <picture>
+              <source srcset="images/lukasAvve.jpg?as=avif" type="image/avif">
+              <source srcset="images/lukasAvve.jpg?as=webp" type="image/webp">
+              <img src="images/lukasAvve.jpg" alt="En brunvit Shetlandsponny och en svart a-ponny går mot kameran i snölandskap">
+            </picture>
+          </figure> 
+      
+          <figure> 
+            <figcaption>Tristan</figcaption> 
+            <picture>
+              <source srcset="images/tristan800.jpg?as=avif" type="image/avif">
+              <source srcset="images/tristan800.jpg?as=webp" type="image/webp">
+              <img src="images/tristan800.jpg" alt="En svartvit Springer Spaniel med snötäckt ansikte">
+            </picture>
+          </figure> 
+      
+          <figure> 
+            <figcaption>Wille och Benjamin</figcaption> 
+            <picture>
+              <source srcset="images/willeBenjamin.jpg?as=avif" type="image/avif">
+              <source srcset="images/willeBenjamin.jpg?as=webp" type="image/webp">
+              <img src="images/willeBenjamin.jpg" alt="Två travhästar med täcken står och äter hö i snölandskap">
+            </picture>
+          </figure> 
+      
+        </section> 
+      </main>
+
+      <footer>
+        <p>Nathalie Fredriksson</p>
+        <p>Mittuniversitetet</p>
+    </footer>
+
+</body>
+
+</html>

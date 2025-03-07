@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moment 1 - Frontend-baserad webbutveckling</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" type="module"></script>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html">Moment 1</a></h1>
+        <!-- Menyknapp för att öppna meny på mobila enheter -->
+        <button class="menu-btn open" id="open-menu">
+            <span class="menu-icon">
+                <span class="bars"></span>
+                <span class="bars"></span>
+                <span class="bars"></span>
+            </span>
+            <span class="menu-text">Meny</span>
+        </button>
+        <!-- Navigeringsmeny -->
+        <nav id="nav-menu">
+            <!-- Menyknapp för att stänga menyn på mobila enheter -->
+            <button class="menu-btn close" id="close-menu">
+                <span class="menu-icon">
+                    <span class="bars cross1"></span>
+                    <span class="bars cross2"></span>
+                </span>
+                <span class="menu-text">Stäng meny</span>
+            </button>
+            <ul>
+                <li><a href="index.html">Startsida</a></li>
+                <li><a href="pictures.html">Bilder</a></li>
+                <li><a href="process.html" class="active">Arbetsprocess</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="process">
+        <h1>Min arbetsprocess för utveckling och publicering</h1>
+        <p>Den här sidan beskriver i detalj hur jag har arbetat med utveckling, automatisering och publicering av min
+            webbplats. Jag har använt moderna verktyg och metoder för att effektivisera arbetsflödet och säkerställa en
+            smidig process. Nedan går jag igenom de viktigaste stegen och verktygen jag har använt.</p>
+
+        <ol>
+            <li><strong>Projektstart och strukturering</strong>
+                <p>Jag började projektet genom att skapa en grundläggande mappstruktur. Jag skapade en "src"-mapp där
+                    jag lade alla mina arbetsfiler (HTML, CSS, JavaScript och bilder). För att hålla projektet
+                    organiserat delade jag upp dessa filer i undermappar för att enkelt kunna navigera mellan dem.</p>
+            </li>
+
+            <li><strong>Installera Parcel</strong>
+                <p>För att börja med utvecklingen installerade jag Parcel, ett byggverktyg och bundlare för webben.
+                    Detta valde jag eftersom det automatiskt hanterar många saker som optimering av filer och
+                    byggprocessen utan att behöva konfigurera komplicerade inställningar. Jag installerade Parcel genom
+                    att köra <code>npm install parcel</code> i terminalen i mitt projekt.</p>
+            </li>
+
+            <li><strong>Skapa och strukturera HTML, CSS och JavaScript</strong>
+                <p>Jag skapade flera HTML-sidor som innehåller grundläggande strukturer för webbplatsen. För att stajla
+                    sidorna använde jag CSS, där jag definierade utseendet på elementen och la till responsiv design så
+                    att webbplatsen skulle fungera bra på olika enheter. För interaktivitet skapade jag en
+                    JavaScript-fil som bland annat innehöll kod för en hamburgermeny på mobila enheter.</p>
+            </li>
+
+            <li><strong>Användning av Git och versionhantering</strong>
+                <p>För att hålla koll på min kod och mina ändringar använde jag Git. Jag skapade först en huvudgren
+                    (main) och började arbeta på mina ändringar där. När jag kom på att jag skulle arbeta i en separat
+                    utvecklingsgren för att hålla mina ändringar separerade från produktionen skapade jag en ny gren
+                    kallad <code>development</code>. Detta möjliggjorde för mig att testa nya funktioner utan att
+                    påverka den stabila koden på main-grenen. Jag använde <code>git checkout -b development</code> för
+                    att skapa och byta till min utvecklingsgren.</p>
+            </li>
+
+            <li><strong>Automatisering med Parcel och optimering av bilder</strong>
+                <p>För att optimera webbplatsens prestanda och effektivisera arbetsflödet använde jag Parcel för att
+                    automatiskt bygga och optimera mina filer. Jag la också till en bildoptimeringsfunktion som
+                    konverterade bilder till moderna format som WebP och AVIF. Jag använde <code><picture></code>-taggen
+                    för att servera olika bildformat beroende på webbläsarens kapabiliteter och säkerställa en bättre
+                    användarupplevelse. Jag började med att använda sharp, men insåg att parcel var lättare så därför
+                    avinstallerade jag detta program genom att köra <code>npm uninstall sharp</code>.</p>
+                    <p>Genom detta tillvägagångssätt slipper jag sitta och spara ner varje bild i respektive format
+                        för optimering - det räcker med att ha en version av bilden i jpg. Detta sparar enormt mycket tid.</p>
+            </li>
+
+            <li><strong>Publicering på Netlify</strong>
+                <p>För att publicera min webbplats använde jag Netlify, en plattform för att hosta statiska webbplatser.
+                    Jag kopplade mitt Git-repo till Netlify och ställde in en byggprocess där Parcel användes för att
+                    bygga och optimera alla filer. Vid varje push till min <code>main</code>-gren så byggdes webbplatsen
+                    automatiskt och publicerades på Netlify.</p>
+            </li>
+
+            <li><strong>Framtida förbättringar</strong>
+                <p>Jag planerar att lägga till fler funktioner och förbättringar till webbplatsen, bland annat genom att
+                    fortsätta använda automatisering för att optimera både prestanda och arbetsflöde. Jag kommer även
+                    att fortsätta jobba med att förbättra användarupplevelsen och säkerheten på webbplatsen.</p>
+            </li>
+        </ol>
+    </main>
+    <footer>
+        <p>Nathalie Fredriksson</p>
+        <p>Mittuniversitetet</p>
+    </footer>
+
+</body>
+
+</html>

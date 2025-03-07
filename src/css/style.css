@@ -1,0 +1,263 @@
+body {
+    background-color: #fee8e6;
+}
+/* Style för menyn */
+header {
+    background-color: #432E54;
+    padding: 3em;
+    display: flex;
+    align-items: center; /* Vertikal centrering */
+    justify-content: space-between; /* Dela upp utrymmet mellan rubrik och länkar */
+}
+
+header h1 {
+    color:#fee8e6;
+}
+
+h1 a {
+    text-decoration: none;  /* Tar bort understrykning */
+    color: inherit;         /* Ärver färgen från förälderelementet (h1) */
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 2em;
+    margin: 0; /* Säkerställ att ul inte har marginaler */
+}
+
+
+header nav ul li a {
+    color: #fee8e6;
+    text-decoration: none;
+    /* Ta bort understrykning */
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+header nav ul li a:hover {
+    color: black;
+    text-decoration: underline;
+    /* Understrykning för ytterligare förtydligande */
+    cursor: pointer;
+}
+
+header nav ul li a.active {
+    color:black;
+    /* Textfärg för aktiv sida */
+    text-decoration: underline;
+}
+
+.menu-btn {
+    display: none;
+}
+
+/* Style för hamburgemeny */
+@media only screen and (max-width: 815px) {
+    header {
+        padding: 0;
+        align-items: center;
+    }
+
+    header h1{
+        padding: 1em;
+    }
+
+    .menu-btn {
+        display: flex;
+        align-items: center;
+        background-color:#fee8e6;
+        padding: 8px 15px;
+        border: black solid 2px;
+        cursor: pointer;
+    }
+
+    .open {
+        margin: 0 1em;
+    }
+
+    .menu-btn:hover {
+        background-color: #fb63b442;
+    }
+
+    .menu-icon {
+        margin-right: 10px;
+    }
+
+    .bars {
+        display: block;
+        width: 20px;
+        height: 3px;
+        background-color: black;
+        margin: 5px 0;
+    }
+
+    .menu-text {
+        font-size: 1.2em;
+        color: black;
+    }
+
+    .close {
+        margin: 1em 1.5em;
+        padding: 10px 15px;
+    }
+
+    .cross1 {
+        width: 25px;
+        transform: rotate(45deg);
+        /* Roterar till lodräta streck så vi får ett kryss */
+        position: relative;
+        top: 5px;
+    }
+
+    .cross2 {
+        width: 25px;
+        transform: rotate(135deg);
+        /* Roterar till lodräta streck så vi får ett kryss */
+        position: relative;
+        top: -3px;
+    }
+
+    #nav-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50%;
+        /* Menyn tar upp 50% av bredden */
+        height: 100%;
+        /* Menyn tar upp hela höjden */
+        background-color:#432E54;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        /* Så att menyn är överallt annat */
+    }
+
+    /* För att visa menyn när den är öppen */
+    #nav-menu.open {
+        display: flex;
+    }
+
+    /* Menylistan vertikal */
+    #nav-menu ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        /* Avstånd mellan varje länk */
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        margin-top: 7em;
+    }
+
+    /* Stil för länkarna i menyn */
+    #nav-menu ul li a {
+        color: white;
+        font-size: 2em;
+        font-weight: normal;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    #nav-menu ul li a:hover {
+        color: #FB63B4;
+        text-decoration: underline;
+    }
+}
+
+.index-text,
+.process {
+    max-width: 800px;
+    padding: 1.6em;
+    margin: 1em auto;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    border-radius: 8px; /* Rundade hörn för en mjukare look */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Skugga för att ge djup */
+
+}
+
+
+.pictures {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+}
+
+.pictures h2 {
+    position: relative;
+    grid-column: span 3; /* Gör så att rubriken inte är en del av grid-en */
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2em;
+    color: #333333;
+    z-index: 2; /* Placera den ovanför grid */
+
+}
+
+/* Stil för figure och figcaption */
+figure {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+figure:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Stil för figcaption */
+figcaption {
+    font-weight: bold;
+    font-size: 1.7em;
+    margin: 10px 0;
+    color: #333;
+}
+
+/* Stil för bilder */
+figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+figure img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsiv design: se till att bilderna ska vara anpassningsbara på mobila enheter */
+@media (max-width: 768px) {
+    .pictures {
+        grid-template-columns: 1fr; /* En kolumn */
+        gap: 20px; /* Mellanrum mellan varje rad */
+    }
+    
+    .pictures h2 {
+        grid-column: 1 / -1; /* Sträck ut rubriken över hela bredden */
+        font-size: 1.8em;
+    }
+
+    figure {
+        margin: 0 auto; /* Centrera varje figure */
+        max-width: 90%; /* Gör att figuren inte tar upp hela skärmbredden */
+    }
+}
+
+footer {
+    background-color: #432E54;
+    padding: 0.8em;
+    margin-top: 1.5em;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+}
