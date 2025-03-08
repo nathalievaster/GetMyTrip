@@ -23,32 +23,31 @@ function toggleMenu() {
 
 // Knapp för ljust och mörkt tema
 
+// Vänta på att hela dokumentet har laddats
 document.addEventListener("DOMContentLoaded", () => {
     const themeToggle = document.getElementById("theme-toggle");
     const currentTheme = localStorage.getItem("theme");
-
-    // Sätt temat vid sidladdning
+  
+    // Kontrollera om användaren har ett sparat tema i localStorage
     if (currentTheme) {
-        document.documentElement.setAttribute("data-theme", currentTheme);
-        document.body.classList.toggle("dark-mode", currentTheme === "dark");
-
-        // Uppdatera knappens text vid sidladdning
-        themeToggle.textContent = currentTheme === "dark" ? "Byt till ljust läge" : "Byt till mörkt läge";
+      document.documentElement.setAttribute("data-theme", currentTheme);
+      if (currentTheme === "dark") {
+        themeToggle.checked = true; // Om mörkt tema är valt, sätt på switchen
+      }
     }
-
-    themeToggle.addEventListener("click", () => {
-        let theme = document.documentElement.getAttribute("data-theme");
-
-        if (theme === "dark") {
-            document.documentElement.setAttribute("data-theme", "light");
-            document.body.classList.remove("dark-mode");
-            localStorage.setItem("theme", "light");
-            themeToggle.textContent = "Byt till mörkt läge";
-        } else {
-            document.documentElement.setAttribute("data-theme", "dark");
-            document.body.classList.add("dark-mode");
-            localStorage.setItem("theme", "dark");
-            themeToggle.textContent = "Byt till ljust läge";
-        }
+  
+    // Lägg till en eventlistener på toggle-knappen
+    themeToggle.addEventListener("change", () => {
+      let theme = document.documentElement.getAttribute("data-theme");
+      
+      if (theme === "dark") {
+        // Sätt tillbaka ljust tema
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+      } else {
+        // Sätt mörkt tema
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+      }
     });
-});
+  });
