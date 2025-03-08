@@ -1,5 +1,10 @@
+@use 'abstracts/functions';
+@use 'abstracts/variables';
+
 @use 'components/buttons';
 
 @use 'layout/footer';
 @use 'layout/header';
 @use 'layout/navigation';
+
+@use 'pages/index';
