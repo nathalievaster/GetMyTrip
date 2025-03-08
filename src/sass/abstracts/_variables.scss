@@ -1,0 +1,17 @@
+// Färgvariabler
+
+//Ljust tema
+$primary-color: #0077B6;   // Primärfärg
+$secondary-color: #00B4D8; // Sekundärfärg
+$background-color: #f8fafa; // Bakgrundsfärg
+$accent-color-1: #FF6B6B;  // Accentfärg 1
+$accent-color-2: #FFD166;  // Accentfärg 2
+$text-color: black;
+
+// Färgvariabler - Mörkt tema
+$primary-dark: darken($primary-color, 15%);
+$secondary-dark: darken($secondary-color, 20%);
+$background-dark: darken($background-color, 30%);
+$accent-dark-1: darken($accent-color-1, 25%);
+$accent-dark-2: darken($accent-color-2, 25%);
+$text-dark: lighten($text-color, 30%);  // Ljusare text för mörk bakgrund
