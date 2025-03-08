@@ -15,3 +15,23 @@ $background-dark: darken($background-color, 30%);
 $accent-dark-1: darken($accent-color-1, 25%);
 $accent-dark-2: darken($accent-color-2, 25%);
 $text-dark: lighten($text-color, 30%);  // Ljusare text för mörk bakgrund
+
+// Standardtema (Ljus)
+:root {
+    --primary: #{$primary-color};
+    --secondary: #{$secondary-color};
+    --background: #{$background-color};
+    --accent-1: #{$accent-color-1};
+    --accent-2: #{$accent-color-2};
+    --text: #{$text-color};
+  }
+  
+  // Mörkt tema
+  [data-theme="dark"] {
+    --primary: #{$primary-dark};
+    --secondary: #{$secondary-dark};
+    --background: #{$background-dark};
+    --accent-1: #{$accent-dark-1};
+    --accent-2: #{$accent-dark-2};
+    --text: #{$text-dark};
+  }

@@ -20,3 +20,6 @@ function toggleMenu() {
         navMenuEl.style.display = "none";
     }
 }
+
+// Knapp för ljust och mörkt tema
+
