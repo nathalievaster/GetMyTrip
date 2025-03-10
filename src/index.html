@@ -11,8 +11,13 @@
 
 <body>
     <header>
-        <h1><a href="index.html">Moment 1</a></h1>
-                <!-- Menyknapp för att öppna meny på mobila enheter -->
+        <picture>
+            <source srcset="images/header.jpg?as=avif" type="image/avif">
+            <source srcset="images/header.jpg?as=webp" type="image/webp">
+            <img src="images/header.jpg" alt="Header image">
+        </picture>
+        <h1>GetMyTrip</h1>
+                <!-- Kommer eventuellt bara ha en sida. 
                 <button class="menu-btn open" id="open-menu">
                     <span class="menu-icon">
                         <span class="bars"></span>
@@ -21,9 +26,9 @@
                     </span>
                     <span class="menu-text">Meny</span>
                 </button>
-                <!-- Navigeringsmeny -->
+        
                 <nav id="nav-menu">
-                    <!-- Menyknapp för att stänga menyn på mobila enheter -->
+                  
                     <button class="menu-btn close" id="close-menu">
                         <span class="menu-icon">
                             <span class="bars cross1"></span>
@@ -34,14 +39,21 @@
                     <ul>
                         <li><a href="index.html" class="active">Startsida</a></li>
                     </ul>
-                </nav>
+                </nav>  -->
+
     </header>
+    <label class="switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+      </label>
 
     <main>
-        <label class="switch">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider"></span>
-          </label>
+    
+
+          <h1>Sök din resa!</h1>
+        <input type="text" id="city-input" placeholder="Sök stad...">
+        <button id="search-btn">Sök</button>
+
 
     </main>
     <footer>
