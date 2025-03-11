@@ -1,5 +1,5 @@
  "use strict"
-
+/*
 // Hämtar elementen
 let openButton = document.getElementById("open-menu");
 let closeButton = document.getElementById("close-menu");
@@ -19,7 +19,7 @@ function toggleMenu() {
     } else {
         navMenuEl.style.display = "none";
     }
-}
+} */
 
 // Knapp för ljust och mörkt tema
 

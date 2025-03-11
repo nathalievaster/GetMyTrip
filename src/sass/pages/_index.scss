@@ -3,8 +3,41 @@ body {
 }
 
 main {
-    background-color: var(--primary);
+    background-color: var(--secondary);
     max-width: 80%;
     margin: 0 auto;
     color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+#city-input {
+    padding: 1em;
+    font-size: 1.2rem;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    width: 450px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+        border: 3px solid;
+        border-color: var(--accent-2);
+        outline: none;
+    }
+}
+
+#search-btn {
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    background-color: var(--accent-2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--accent-1);
+    }
 }

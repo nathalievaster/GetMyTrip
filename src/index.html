@@ -7,6 +7,7 @@
     <title>Moment 1 - Frontend-baserad webbutveckling</title>
     <link rel="stylesheet" href="sass/main.scss">
     <script src="js/main.js" type="module"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -53,6 +54,16 @@
           <h1>Sök din resa!</h1>
         <input type="text" id="city-input" placeholder="Sök stad...">
         <button id="search-btn">Sök</button>
+
+        <section id="weather">
+            <h2>Väder</h2>
+            <p id="weather-info">Sök en stad för att se vädret.</p>
+        </section>
+
+        <section id="map">
+            <h2>Karta</h2>
+            <div id="map-container"></div>
+        </section>
 
 
     </main>
