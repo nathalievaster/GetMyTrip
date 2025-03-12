@@ -67,3 +67,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!searchButton || !locationInput || !mapContainer || !weatherInfo) {
         return;
     }
+
+    // Funktionen tar in parametrarna longitud och latitud
+    function updateMap(lat, lon) {
+        // Lägger kartan i en iframe med style
+        mapContainer.innerHTML = ` 
+            <iframe 
+                width="100%" 
+                height="400" 
+                style="border-radius: 10px; border: none;"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=${lon-0.05},${lat-0.05},${lon+0.05},${lat+0.05}&layer=mapnik&marker=${lat},${lon}">
+            </iframe>
+        `;
+        // Skapar ett litet område kring punkten med bounding box och sätter en markör på punkten
+    }
+
