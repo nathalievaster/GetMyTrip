@@ -54,10 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // KARTAN
 
+// Lyssnar efter när DOMen laddats klart innan funktionen körs
+  document.addEventListener("DOMContentLoaded", () => {
 // Samlar alla element samt API-nyckeln från OpenWeather i variabler
-
     const searchButton = document.getElementById("search-btn");
     const locationInput = document.getElementById("city-input");
     const mapContainer = document.getElementById("map-container");
     const weatherInfo = document.getElementById("weather-info");
     const API_KEY = "0cef79cf6ad06decc7cf8cf1842e442d";
+
+    // Kontrollerar att elementen finns och om de inte finns så avbryts koden med return
+    if (!searchButton || !locationInput || !mapContainer || !weatherInfo) {
+        return;
+    }
