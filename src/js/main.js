@@ -51,3 +51,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // KARTAN
+
+// Samlar alla element samt API-nyckeln från OpenWeather i variabler
+
+    const searchButton = document.getElementById("search-btn");
+    const locationInput = document.getElementById("city-input");
+    const mapContainer = document.getElementById("map-container");
+    const weatherInfo = document.getElementById("weather-info");
+    const API_KEY = "0cef79cf6ad06decc7cf8cf1842e442d";
