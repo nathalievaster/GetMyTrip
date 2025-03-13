@@ -5,3 +5,43 @@
     margin: auto;  /* Centrerad */
     border-radius: 10px; 
 }
+
+#weather {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.weather-card {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    min-width: 250px;
+}
+
+.city-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.weather-description {
+    font-size: 1.2em;
+    font-style: italic;
+    color: #555;
+}
+
+.temperature, .wind-speed {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.temperature span, .wind-speed span {
+    font-size: 1.6em;
+}
+
+.temperature::before, .wind-speed::before {
+    font-size: 2em;
+    margin-right: 5px;
+}
