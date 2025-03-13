@@ -1,25 +1,6 @@
  "use strict"
-/*
-// Hämtar elementen
-let openButton = document.getElementById("open-menu");
-let closeButton = document.getElementById("close-menu");
 
-//Lägger till eventlyssnare
-openButton.addEventListener('click', toggleMenu);
-closeButton.addEventListener('click', toggleMenu);
-
-// Skapar funktionen som fungerar på båda knapparna
-function toggleMenu() {
-    let navMenuEl = document.getElementById("nav-menu");
-    navMenuEl.classList.toggle("open")
-
-    let style = window.getComputedStyle(navMenuEl);
-    if (style.display === "none") {
-        navMenuEl.style.display = "block";
-    } else {
-        navMenuEl.style.display = "none";
-    }
-} */
+ import Chart from 'chart.js/auto';
 
 // Knapp för ljust och mörkt tema
 
@@ -150,4 +131,18 @@ document.addEventListener("DOMContentLoaded", () => {
     updateWeather(57.7089, 11.9746);
 
     searchButton.addEventListener("click", searchLocation);
+});
+
+const ctx = document.getElementById('weatherChart').getContext('2d');
+const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Mån', 'Tis', 'Ons', 'Tors', 'Fre'],
+        datasets: [{
+            label: 'Temperatur (°C)',
+            data: [12, 14, 9, 11, 15],
+            borderColor: 'blue',
+            fill: false
+        }]
+    }
 });
