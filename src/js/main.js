@@ -145,5 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
+    // Initiera kartan med Göteborg vid sidladdning
+    updateMap(57.7089, 11.9746);
+    updateWeather(57.7089, 11.9746);
+
     searchButton.addEventListener("click", searchLocation);
 });
