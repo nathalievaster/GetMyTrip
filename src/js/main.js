@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // KARTAN
 // Lyssnar efter när DOMen laddats klart innan funktionen körs
-// Lyssnar efter när DOMen laddats klart innan funktionen körs
+
 document.addEventListener("DOMContentLoaded", () => {
     // Samlar alla element samt API-nyckeln från OpenWeather i variabler
     const searchButton = document.getElementById("search-btn");
@@ -62,10 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateWeather(lat, lon) {
+
+        document.getElementById("loading-spinner").classList.remove("hidden"); // Visar spinnern när det laddar
         // Hämtar 5-dagarsprognosen från OpenWeather API
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=sv`)
             .then(response => response.json()) // Konverterar svaret till JSON-format
             .then(weatherData => {
+                document.getElementById("loading-spinner").classList.add("hidden"); // Gömmer när det laddat klart
                 // Kontrollerar om API-anropet lyckades (kod 200 betyder att data hämtades korrekt)
                 if (weatherData.cod === "200") {
                     // Hämta stadens namn och landets kod
@@ -84,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Konvertera till arrays för diagrammet
                     const labels = Object.keys(dailyTemps).map(date => new Date(date).toLocaleDateString("sv-SE", { weekday: "short" }));
                     const temps = Object.values(dailyTemps);
+                    
 
                     // Uppdatera väderinformationen i HTML
                     weatherInfo.innerHTML = `
