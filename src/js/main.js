@@ -34,22 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // KARTAN
-
 // Lyssnar efter när DOMen laddats klart innan funktionen körs
-  document.addEventListener("DOMContentLoaded", () => {
-// Samlar alla element samt API-nyckeln från OpenWeather i variabler
+// Lyssnar efter när DOMen laddats klart innan funktionen körs
+document.addEventListener("DOMContentLoaded", () => {
+    // Samlar alla element samt API-nyckeln från OpenWeather i variabler
     const searchButton = document.getElementById("search-btn");
     const locationInput = document.getElementById("city-input");
     const mapContainer = document.getElementById("map-container");
     const weatherInfo = document.getElementById("weather-info");
     const API_KEY = "0cef79cf6ad06decc7cf8cf1842e442d";
 
-    // Kontrollerar att elementen finns och om de inte finns så avbryts koden med return
-    if (!searchButton || !locationInput || !mapContainer || !weatherInfo) {
-        return;
-    }
+    if (!searchButton || !locationInput || !mapContainer || !weatherInfo) return;
 
-    // Funktionen tar in parametrarna longitud och latitud
+    let weatherChart; // Håller referens till diagrammet
+
     function updateMap(lat, lon) {
         // Lägger kartan i en iframe med style
         mapContainer.innerHTML = ` 
@@ -64,21 +62,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateWeather(lat, lon) {
-        // Hämtar väderdata från OpenWeather API med angivna latitud och longitud
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=sv`)
+        // Hämtar 5-dagarsprognosen från OpenWeather API
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=sv`)
             .then(response => response.json()) // Konverterar svaret till JSON-format
             .then(weatherData => {
                 // Kontrollerar om API-anropet lyckades (kod 200 betyder att data hämtades korrekt)
-                if (weatherData.cod === 200) {
-                    // Uppdaterar väderinformationen i HTML med data från API
+                if (weatherData.cod === "200") {
+                    // Hämta stadens namn och landets kod
+                    const cityName = weatherData.city.name;
+                    const country = weatherData.city.country;
+
+                    // Filtrera fram EN temperatur per dag (kl 12:00 varje dag)
+                    let dailyTemps = {};
+                    weatherData.list.forEach(entry => {
+                        const date = entry.dt_txt.split(" ")[0]; // Hämta bara datumet (YYYY-MM-DD)
+                        if (!dailyTemps[date] && entry.dt_txt.includes("12:00:00")) {
+                            dailyTemps[date] = entry.main.temp;
+                        }
+                    });
+
+                    // Konvertera till arrays för diagrammet
+                    const labels = Object.keys(dailyTemps).map(date => new Date(date).toLocaleDateString("sv-SE", { weekday: "short" }));
+                    const temps = Object.values(dailyTemps);
+
+                    // Uppdatera väderinformationen i HTML
                     weatherInfo.innerHTML = `
                         <div class="weather-card">
-                            <h3 class="city-name">${weatherData.name}, ${weatherData.sys.country}</h3>
-                            <p class="weather-description">${weatherData.weather[0].description}</p>
-                            <p class="temperature">🌡️ <span>${weatherData.main.temp}°C</span></p>
-                            <p class="wind-speed">💨 <span>${weatherData.wind.speed} m/s</span></p>
+                            <h3 class="city-name">${cityName}, ${country}</h3>
+                            <p class="weather-description">${weatherData.list[0].weather[0].description}</p>
+                            <p class="temperature">🌡️ <span>${weatherData.list[0].main.temp}°C</span></p>
+                            <p class="wind-speed">💨 <span>${weatherData.list[0].wind.speed} m/s</span></p>
                         </div>
                     `;
+
+                    // Uppdatera diagrammet
+                    updateWeatherChart(temps, labels);
                 } else {
                     // Om API-svaret innehåller ett felmeddelande, visas detta istället
                     weatherInfo.textContent = "Väderinformation kunde inte hämtas.";
@@ -91,13 +109,47 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
+    function updateWeatherChart(temps, labels) {
+        const ctx = document.getElementById('weatherChart').getContext('2d');
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+        gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
+
+        if (weatherChart) {
+            // Om diagrammet redan finns, uppdatera det
+            weatherChart.data.labels = labels;
+            weatherChart.data.datasets[0].data = temps;
+            weatherChart.update();
+        } else {
+            // Om inget diagram finns, skapa ett nytt
+            weatherChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Temperatur (°C)',
+                        data: temps,
+                        borderColor: '#007bff',
+                        backgroundColor: gradient, 
+                        borderWidth: 2,
+                        pointBackgroundColor: '#fff', 
+                        pointRadius: 5, 
+                        fill: true, 
+                        tension: 0.4 
+                    }]
+                }
+            });
+        }
+    }
+
     function searchLocation() {
         // Hämtar platsen som användaren har skrivit in i inputfältet och tar bort eventuella mellanslag i början/slutet
         let location = locationInput.value.trim();
     
         // Kontrollerar om inputfältet är tomt, om ja - visa en varning och avsluta funktionen
         if (!location) {
-            alert("Ange en plats!"); // Meddelar användaren att de måste ange en plats
+            alert("Ange en plats!");
             return;
         }
     
@@ -107,15 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(data => {
                 // Om inga resultat hittades, visa en varning och avsluta funktionen
                 if (data.length === 0) {
-                    alert("Platsen hittades inte!"); // Meddelar användaren att platsen inte kunde hittas
+                    alert("Platsen hittades inte!");
                     return;
                 }
-    
-                // Konverterar latitud och longitud från sträng till flyttal (decimaltal)
+
                 let lat = parseFloat(data[0].lat);
                 let lon = parseFloat(data[0].lon);
-    
-                // Uppdaterar kartan med de nya koordinaterna
+
                 updateMap(lat, lon);
                 // Hämtar och uppdaterar väderinformationen för platsen
                 updateWeather(lat, lon);
@@ -126,23 +176,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
 
-    // Initiera kartan med Göteborg vid sidladdning
+    // Initiera kartan och vädret med Göteborg vid sidladdning
     updateMap(57.7089, 11.9746);
     updateWeather(57.7089, 11.9746);
 
     searchButton.addEventListener("click", searchLocation);
-});
-
-const ctx = document.getElementById('weatherChart').getContext('2d');
-const chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Mån', 'Tis', 'Ons', 'Tors', 'Fre'],
-        datasets: [{
-            label: 'Temperatur (°C)',
-            data: [12, 14, 9, 11, 15],
-            borderColor: 'blue',
-            fill: false
-        }]
-    }
 });
