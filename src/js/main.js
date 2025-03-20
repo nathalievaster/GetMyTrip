@@ -142,6 +142,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         fill: true, 
                         tension: 0.4 
                     }]
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff' // <-- färg på "Temperatur (°C)"
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#fff' // <-- färg på X-axelns labels
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#fff' // <-- färg på Y-axelns labels
+                            }
+                        }
+                    }
                 }
             });
         }
