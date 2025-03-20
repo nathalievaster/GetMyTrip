@@ -3,12 +3,20 @@ body {
 }
 
 main {
-    background-color: var(--secondary);
+    background-color: var(--primary);
     max-width: 80%;
     margin: 0 auto;
     color: white;
     text-align: center;
     padding: 1em;
+    position: relative;
+    top: -120px; 
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 4rem;
+    padding: 4rem 1rem;
+    transition: transform 0.4s ease;
+    will-change: transform;
 }
 
 #city-input {
@@ -61,3 +69,4 @@ main {
     display: block;
     margin: 0 auto; 
 }
+

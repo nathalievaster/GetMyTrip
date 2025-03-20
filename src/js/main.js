@@ -186,3 +186,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     searchButton.addEventListener("click", searchLocation);
 });
+
+window.addEventListener('scroll', () => {
+    const main = document.querySelector('main');
+    const scrollY = window.scrollY;
+
+    // Ju mer man skrollar, desto mer rör sig main uppåt lite grann
+    if(scrollY < 200) {
+        main.style.transform = `translateY(${scrollY * 0.4}px)`;
+    }
+});
