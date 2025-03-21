@@ -208,6 +208,8 @@ document.addEventListener("DOMContentLoaded", () => {
     searchButton.addEventListener("click", searchLocation);
 });
 
+
+// Funktion för att main flyttas vid skroll
 window.addEventListener('scroll', () => {
     const main = document.querySelector('main');
     const scrollY = window.scrollY;
@@ -216,4 +218,21 @@ window.addEventListener('scroll', () => {
     if(scrollY < 200) {
         main.style.transform = `translateY(${scrollY * 0.4}px)`;
     }
+});
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const closeBtn = document.getElementById('lightbox-close');
+
+document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = img.dataset.caption;
+        lightbox.style.display = 'flex';
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
 });
