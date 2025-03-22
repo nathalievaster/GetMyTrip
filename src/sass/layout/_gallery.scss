@@ -27,7 +27,7 @@
                     transition: transform 0.3s ease;
 
                     &:hover {
-                        transform: scale(1.05);
+                        transform: scale(1.1);
                     }
                 }
             }
@@ -37,7 +37,7 @@
                 bottom: 10px;
                 left: 50%;
                 transform: translateX(-50%);
-           
+                background: rgba(255, 255, 255, 0.7);
                 padding: 0.5rem 1rem;
                 border: 2px solid white;
                 border-radius: 5px;
@@ -52,8 +52,41 @@
     }
 }
 
+    /* Responsivitet */
+    @media (max-width: 1024px) {
+        h2 {
+            font-size: 4rem;
+        }
 
-/* Lightbox */
+        .gallery-container {
+            gap: 2rem;
+        }
+
+        .gallery-item p {
+            font-size: 1.6rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 3rem;
+        }
+
+        .gallery-container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery-item {
+            max-width: 90%;
+        }
+
+        .gallery-item p {
+            font-size: 1.4rem;
+            padding: 0.4rem 0.8rem;
+        }
+    }
+
 .lightbox {
     display: none;
     position: fixed;
@@ -66,30 +99,30 @@
     align-items: center;
     flex-direction: column;
     z-index: 1000;
-}
 
-.lightbox-content {
-    position: relative;
-    text-align: center;
-}
+    &-content {
+        position: relative;
+        text-align: center;
+    }
 
-.lightbox img {
-    max-width: 90%;
-    max-height: 80vh;
-    border-radius: 10px;
-}
+    img {
+        max-width: 90%;
+        max-height: 80vh;
+        border-radius: 10px;
+    }
 
-.lightbox p {
-    color: #fff;
-    margin-top: 1rem;
-    font-size: 1.2rem;
-}
+    p {
+        color: #fff;
+        margin-top: 1rem;
+        font-size: 1.2rem;
+    }
 
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 2rem;
-    color: #fff;
-    cursor: pointer;
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 2rem;
+        color: #fff;
+        cursor: pointer;
+    }
 }
