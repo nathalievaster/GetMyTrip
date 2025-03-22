@@ -56,16 +56,28 @@
         <h2>Populära resmål</h2>
         <div class="gallery-container">
             <div class="gallery-item">
-                <img src="images/radjur.jpg" alt="Safari i Tanzania" data-caption="Safari i Tanzania">
-                <p>Safari i Tanzania</p>
+                <picture>
+                    <source srcset="images/safari.jpg?as=avif" type="image/avif">
+                    <source srcset="images/safari.jpg?as=webp" type="image/webp">
+                    <img src="images/safari.jpg" alt="Giraff står vid ett träd och äter" data-caption="Safari i Tanzania">
+                </picture>
+                <p>SAFARI I TANZANIA</p>
             </div>
             <div class="gallery-item">
-                <img src="images/kiralov.jpg" alt="Weekend i Paris" data-caption="Weekend i Paris">
-                <p>Weekend i Paris</p>
+                <picture>
+                    <source srcset="images/skidresa.jpg?as=avif" type="image/avif">
+                    <source srcset="images/skidresa.jpg?as=webp" type="image/webp">
+                    <img src="images/skidresa.jpg" alt="Två skidåkare i snötäckt fjäll" data-caption="Skidresa i Åre">
+                </picture>
+                <p>SKIDRESA I ÅRE</p>
             </div>
             <div class="gallery-item">
-                <img src="images/header.jpg" alt="Surf i Bali" data-caption="Surf i Bali">
-                <p>Surf i Bali</p>
+                <picture>
+                    <source srcset="images/srilanka.jpg?as=avif" type="image/avif">
+                    <source srcset="images/srilanka.jpg?as=webp" type="image/webp">
+                    <img src="images/srilanka.jpg" alt="Färgstarkt tåg i frodig natur" data-caption="Tågluff i Sri Lanka">
+                </picture>
+                <p>TÅGLUFF I SRI LANKA</p>
             </div>
         </div>
     </section>
@@ -74,7 +86,7 @@
 <div class="lightbox" id="lightbox">
     <div class="lightbox-content">
         <span class="close-btn" id="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="images/kiralov.jpg" alt="I...">
+        <img id="lightbox-img" src="images/safari.jpg" alt="I...">
         <p id="lightbox-caption"></p>
     </div>
 </div>
