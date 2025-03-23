@@ -26,5 +26,8 @@ header {
         border: 2px solid white;
         color: var(--accent-1);
 
+        @media (max-width: 770px) {
+            font-size: 3rem;
+        }
     }
 }

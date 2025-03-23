@@ -48,33 +48,31 @@
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             }
         }
-
     }
-}
 
     /* Responsivitet */
     @media (max-width: 1024px) {
         h2 {
-            font-size: 4rem;
+            font-size: 4rem;  // Gör rubriken lite mindre på större skärmar
         }
 
         .gallery-container {
             gap: 2rem;
         }
 
-        .gallery-item p {
+        p {
             font-size: 1.6rem;
         }
     }
 
     @media (max-width: 768px) {
-        h2 {
-            font-size: 3rem;
-        }
-
-        .gallery-container {
+        .image-gallery {
             flex-direction: column;
             align-items: center;
+
+            h2 {
+                font-size: 1rem;
+            }
         }
 
         .gallery-item {
@@ -82,10 +80,11 @@
         }
 
         .gallery-item p {
-            font-size: 1.4rem;
-            padding: 0.4rem 0.8rem;
-        }
+            font-size: 0.7rem;
+            padding: 0;
     }
+}
+}
 
 .lightbox {
     display: none;
