@@ -1,0 +1,57 @@
+#weather {
+    text-align: center;
+
+    .weather-card {
+        padding: 15px;
+        border-radius: 10px; 
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        display: inline-block;
+        min-width: 250px;
+        background-color: var(--accent-1);
+    }
+
+    .city-name {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .weather-description {
+        font-size: 1.2em;
+        font-style: italic;
+        color: #555;
+    }
+
+    .temperature,
+    .wind-speed {
+        font-size: 1.4em;
+        font-weight: bold;
+        margin-top: 5px;
+
+        span {
+            font-size: 1.6em;
+        }
+
+        &::before {
+            font-size: 2em;
+            margin-right: 5px;
+        }
+    }
+}
+
+#weatherChart {
+    max-width: 700px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        max-width: 90%;
+    }
+
+    @media (max-width: 480px) {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+}

@@ -7,43 +7,93 @@
     <title>Moment 1 - Frontend-baserad webbutveckling</title>
     <link rel="stylesheet" href="sass/main.scss">
     <script src="js/main.js" type="module"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 
 <body>
     <header>
-        <h1><a href="index.html">Moment 1</a></h1>
-                <!-- Menyknapp för att öppna meny på mobila enheter -->
-                <button class="menu-btn open" id="open-menu">
-                    <span class="menu-icon">
-                        <span class="bars"></span>
-                        <span class="bars"></span>
-                        <span class="bars"></span>
-                    </span>
-                    <span class="menu-text">Meny</span>
-                </button>
-                <!-- Navigeringsmeny -->
-                <nav id="nav-menu">
-                    <!-- Menyknapp för att stänga menyn på mobila enheter -->
-                    <button class="menu-btn close" id="close-menu">
-                        <span class="menu-icon">
-                            <span class="bars cross1"></span>
-                            <span class="bars cross2"></span>
-                        </span>
-                        <span class="menu-text">Stäng meny</span>
-                    </button>
-                    <ul>
-                        <li><a href="index.html" class="active">Startsida</a></li>
-                    </ul>
-                </nav>
+        <picture>
+            <source srcset="images/header.jpg?as=avif" type="image/avif">
+            <source srcset="images/header.jpg?as=webp" type="image/webp">
+            <img src="images/header.jpg" alt="Header image">
+        </picture>
+        <h1>GET MY TRIP</h1>
+
     </header>
+    <label class="switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+      </label>
+
+
 
     <main>
-        <button id="theme-toggle" class="floating-btn">Byt till mörkt läge</button>
+    
+
+          <h1>Sök din resa!</h1>
+        <input type="text" id="city-input" placeholder="Sök stad...">
+        <button id="search-btn">Sök</button>
+
+        <div id="loading-spinner" class="hidden">
+            <div class="spinner"></div>
+        </div>
+
+        <section id="weather">
+            <h2>Väder</h2>
+            <p id="weather-info">Sök en stad för att se vädret.</p>
+            <canvas id="weatherChart"></canvas>
+        </section>
+
+        <section id="map">
+            <h2>Karta</h2>
+            <div id="map-container"></div>
+        </section>
+
 
     </main>
+
+    <section class="image-gallery">
+        <h2>Populära resmål</h2>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <picture>
+                    <source srcset="images/safari.jpg?as=avif" type="image/avif">
+                    <source srcset="images/safari.jpg?as=webp" type="image/webp">
+                    <img src="images/safari.jpg" alt="Giraff står vid ett träd och äter" data-caption="Safari i Tanzania">
+                </picture>
+                <p>SAFARI I TANZANIA</p>
+            </div>
+            <div class="gallery-item">
+                <picture>
+                    <source srcset="images/skidresa.jpg?as=avif" type="image/avif">
+                    <source srcset="images/skidresa.jpg?as=webp" type="image/webp">
+                    <img src="images/skidresa.jpg" alt="Två skidåkare i snötäckt fjäll" data-caption="Skidresa i Åre">
+                </picture>
+                <p>SKIDRESA I ÅRE</p>
+            </div>
+            <div class="gallery-item">
+                <picture>
+                    <source srcset="images/srilanka.jpg?as=avif" type="image/avif">
+                    <source srcset="images/srilanka.jpg?as=webp" type="image/webp">
+                    <img src="images/srilanka.jpg" alt="Färgstarkt tåg i frodig natur" data-caption="Tågluff i Sri Lanka">
+                </picture>
+                <p>TÅGLUFF I SRI LANKA</p>
+            </div>
+        </div>
+    </section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+        <span class="close-btn" id="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="images/safari.jpg" alt="I...">
+        <p id="lightbox-caption"></p>
+    </div>
+</div>
     <footer>
         <p>Nathalie Fredriksson</p>
         <p>Mittuniversitetet</p>
+        <a href="../out/index.html" target="_blank">Se teknisk dokumentation</a>
     </footer>
 
 
