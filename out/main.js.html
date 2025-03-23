@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict"
+
+import Chart from 'chart.js/auto';
+
+/**
+ * Vänta på att hela dokumentet har laddats innan teman och event listeners aktiveras
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById("theme-toggle");
+    const currentTheme = localStorage.getItem("theme");
+
+    // Kontrollera om användaren har ett sparat tema i localStorage
+    if (currentTheme) {
+        document.documentElement.setAttribute("data-theme", currentTheme);
+        if (currentTheme === "dark") {
+            themeToggle.checked = true; // Om mörkt tema är valt, sätt på switchen
+        }
+    }
+
+    // Lägg till en eventlistener på toggle-knappen
+    themeToggle.addEventListener("change", () => {
+        let theme = document.documentElement.getAttribute("data-theme");
+
+        if (theme === "dark") {
+            // Sätt tillbaka ljust tema
+            document.documentElement.setAttribute("data-theme", "light");
+            localStorage.setItem("theme", "light");
+        } else {
+            // Sätt mörkt tema
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+        }
+    });
+});
+
+/**
+ * Uppdaterar kartan med en markör på angivna lat och lon
+ * @param {number} lat - Latitud för platsen
+ * @param {number} lon - Longitud för platsen
+ */
+function updateMap(lat, lon) {
+    const mapContainer = document.getElementById("map-container");
+    mapContainer.innerHTML = ` 
+        &lt;iframe 
+            width="100%" 
+            height="400" 
+            style="border-radius: 10px; border: none;"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=${lon - 0.05},${lat - 0.05},${lon + 0.05},${lat + 0.05}&amp;layer=mapnik&amp;marker=${lat},${lon}">
+        &lt;/iframe>
+    `;
+}
+
+let weatherChart; // Håller referens till diagrammet
+
+/**
+ * Hämtar väderdata och uppdaterar väderinfo och diagram
+ * @param {number} lat - Latitud för platsen
+ * @param {number} lon - Longitud för platsen
+ */
+function updateWeather(lat, lon) {
+    const weatherInfo = document.getElementById("weather-info");
+    const API_KEY = "0cef79cf6ad06decc7cf8cf1842e442d";
+
+    document.getElementById("loading-spinner").classList.remove("hidden"); // Visar spinnern när det laddar
+
+    // Hämtar 5-dagarsprognosen från OpenWeather API
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&amp;lon=${lon}&amp;appid=${API_KEY}&amp;units=metric&amp;lang=sv`)
+        .then(response => response.json())
+        .then(weatherData => {
+            document.getElementById("loading-spinner").classList.add("hidden"); // Gömmer när det laddat klart
+            if (weatherData.cod === "200") {
+                const cityName = weatherData.city.name;
+                const country = weatherData.city.country;
+
+                // Filtrera fram EN temperatur per dag (kl 12:00 varje dag)
+                let dailyTemps = {};
+                weatherData.list.forEach(entry => {
+                    const date = entry.dt_txt.split(" ")[0];
+                    if (!dailyTemps[date] &amp;&amp; entry.dt_txt.includes("12:00:00")) {
+                        dailyTemps[date] = entry.main.temp;
+                    }
+                });
+
+                const labels = Object.keys(dailyTemps).map(date => new Date(date).toLocaleDateString("sv-SE", { weekday: "short" }));
+                const temps = Object.values(dailyTemps);
+
+                // Uppdatera väderinformationen i HTML
+                weatherInfo.innerHTML = `
+                    &lt;div class="weather-card">
+                        &lt;h3 class="city-name">${cityName}, ${country}&lt;/h3>
+                        &lt;p class="weather-description">${weatherData.list[0].weather[0].description}&lt;/p>
+                        &lt;p class="temperature">🌡️ &lt;span>${weatherData.list[0].main.temp}°C&lt;/span>&lt;/p>
+                        &lt;p class="wind-speed">💨 &lt;span>${weatherData.list[0].wind.speed} m/s&lt;/span>&lt;/p>
+                    &lt;/div>
+                `;
+
+                // Uppdatera diagrammet
+                updateWeatherChart(temps, labels);
+            } else {
+                weatherInfo.textContent = "Väderinformation kunde inte hämtas.";
+            }
+        })
+        .catch(error => {
+            console.error("Fel vid hämtning av väderdata:", error);
+            weatherInfo.textContent = "Något gick fel vid hämtning av väder!";
+        });
+}
+
+/**
+ * Uppdaterar eller skapar ett linjediagram med temperaturdata
+ * @param {number[]} temps - Array med temperaturvärden
+ * @param {string[]} labels - Array med etiketter (dagar)
+ */
+function updateWeatherChart(temps, labels) {
+    const ctx = document.getElementById('weatherChart').getContext('2d');
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+    gradient.addColorStop(1, 'rgba(0, 123, 255, 0)');
+
+    if (weatherChart) {
+        weatherChart.data.labels = labels;
+        weatherChart.data.datasets[0].data = temps;
+        weatherChart.update();
+    } else {
+        weatherChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Temperatur (°C)',
+                    data: temps,
+                    borderColor: '#007bff',
+                    backgroundColor: gradient, 
+                    borderWidth: 2,
+                    pointBackgroundColor: '#fff', 
+                    pointRadius: 5, 
+                    fill: true, 
+                    tension: 0.4 
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: '#fff'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            }
+        });
+    }
+}
+
+/**
+ * Söker efter en plats, hämtar dess koordinater och uppdaterar karta och väder
+ */
+function searchLocation() {
+    const locationInput = document.getElementById("city-input");
+    const location = locationInput.value.trim();
+
+    if (!location) {
+        alert("Ange en plats!");
+        return;
+    }
+
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&amp;q=${encodeURIComponent(location)}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length === 0) {
+                alert("Platsen hittades inte!");
+                return;
+            }
+
+            let lat = parseFloat(data[0].lat);
+            let lon = parseFloat(data[0].lon);
+
+            updateMap(lat, lon);
+            updateWeather(lat, lon);
+        })
+        .catch(error => {
+            console.error("Fel vid API-anrop:", error);
+        });
+}
+
+// Initiera kartan och vädret med Göteborg vid sidladdning
+updateMap(57.7089, 11.9746);
+updateWeather(57.7089, 11.9746);
+
+// KARTAN - DOMContentLoaded för knapp
+const searchButton = document.getElementById("search-btn");
+searchButton.addEventListener("click", searchLocation);
+
+// Funktion för att main flyttas vid skroll
+window.addEventListener('scroll', () => {
+    const main = document.querySelector('main');
+    const scrollY = window.scrollY;
+
+    // Ju mer man skrollar, desto mer rör sig main uppåt lite grann
+    if(scrollY &lt; 200) {
+        main.style.transform = `translateY(${scrollY * 0.4}px)`;
+    }
+});
+
+// LIGHTBOX
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxCaption = document.getElementById('lightbox-caption');
+const closeBtn = document.getElementById('lightbox-close');
+
+document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = img.dataset.caption;
+        lightbox.style.display = 'flex';
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#searchLocation">searchLocation</a></li><li><a href="global.html#updateMap">updateMap</a></li><li><a href="global.html#updateWeather">updateWeather</a></li><li><a href="global.html#updateWeatherChart">updateWeatherChart</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sun Mar 23 2025 23:52:30 GMT+0100 (centraleuropeisk normaltid)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
