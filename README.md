@@ -14,5 +14,5 @@
 - **Node.js (för byggverktyg och automation)**  
 - **API:er**  
   - [OpenWeather API](https://openweathermap.org/api) – för väderdata  
-  - [Leaflet](https://leafletjs.com/) eller [Google Maps API](https://developers.google.com/maps) – för kartvisning  
+  - [OpenStreetMap] och [Nominatim] – för kartvisning och geokodning 
 - **Git för versionshantering**  
